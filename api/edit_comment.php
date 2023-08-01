@@ -17,7 +17,7 @@ $stmt->bind_param($board_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if(mysql_num_rows($cursor) >= 1) {
-    $row = $cursor->fetch_row();
+    $row = $cursor->fetch_assoc();
     if($_SESSION["uid"] === $row["writter"]) {
         $stmt->close();
         $stmt = $mysqli->stmt_init();

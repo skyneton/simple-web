@@ -34,7 +34,7 @@ if(isset($_GET['query'])) {
         <td>ID</td>
         <td>TITLE</td>
     </tr>
-    <?while($row = $cursor->fetch_row()) {?>
+    <? while($row = $cursor->fetch_assoc()) { ?>
         <tr>
             <td><?=$row["id"]?></td>
             <td>

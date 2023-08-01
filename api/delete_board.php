@@ -20,14 +20,14 @@ $stmt->bind_param($board_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if(mysql_num_rows($cursor) >= 1) {
-    $row = $cursor->fetch_row();
+    $row = $cursor->fetch_assoc();
     if($row["writter"] === $_SESSION["uid"]) {
         $mysqli->query("DELETE FROM comment WHERE bid = $board_id;")
         $file_cursor = $mysqli->query("SELECT id FROM file_storage WHERE bid = $board_id;")
         if(!file_exists($web_file_dir)) {
             mkdir($web_file_dir)
         }
-        while($file = $file_cursor->fetch_row()) {
+        while($file = $file_cursor->fetch_assoc()) {
             unlink($web_file_dir.'/'.$file["id"])
         }
         $mysqli->query("DELETE FROM file_storage WHERE bid = $board_id;")

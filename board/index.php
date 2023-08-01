@@ -24,7 +24,7 @@ if(mysql_num_rows($cursor) < 1) {
     die;
 }
 
-$row = $cursor->fetch_row();
+$row = $cursor->fetch_assoc();
 ?>
 
 <h3><?=$row["title"]?></h3>
@@ -40,7 +40,7 @@ $row = $cursor->fetch_row();
     <ul>
         <?
         $file_cursor = $mysqli->query("SELECT * FROM file_storage WHERE bid = $board_id;");
-        while($file = $file_cursor->fetch_row()) {?>
+        while($file = $file_cursor->fetch_assoc()) {?>
         <a href="/api/download.php?id=<?=$file["id"]?>" target="_blank">
             <li><?=$file["name"]?></li>
         </a>
@@ -54,7 +54,7 @@ $row = $cursor->fetch_row();
     </div>
     <?
     $comment_cursor = $mysqli->query("SELECT * FROM comment WHERE bid = $board_id ORDER BY id DESC;");
-    while($comment = $comment_cursor->fetch_row()) {?>
+    while($comment = $comment_cursor->fetch_assoc()) {?>
         <div>
             <?if($comment["writter"] === $_SESSION["uid"] || $row["writter"] === $_SESSION["uid"]) {?>
                 <button onclick="commentEdit(this)">수정</button>

@@ -22,7 +22,7 @@ $stmt->bind_param($id, $pw);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if(mysql_num_rows($cursor) >= 1) {
-    $row = $cursor->fetch_row();
+    $row = $cursor->fetch_assoc();
     $_SESSION["uid"] = $row["id"];
     $stmt->close();
     $mysqli->close();
