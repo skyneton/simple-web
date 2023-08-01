@@ -23,7 +23,7 @@ if($cursor->num_rows >= 1 && file_exists($web_file_dir.'/'.$file_id)) {
     header("Content-Type: ".$row["type"]);
     header("Content-Disposition: attachment;filename=".$row["name"]);
     header("Content-Length: ".filesize($web_file_dir.'/'.$file_id))
-    @readfile($web_file_dir.'/'.$file_id);
+    readfile($web_file_dir.'/'.$file_id);
     exit
 }
 
