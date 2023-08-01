@@ -19,7 +19,7 @@ if(strlen($id) <= 0 || strlen($pw) <= 0) {
 $mysqli = db_connect();
 create_table($mysqli, "board", "id TEXT PRIMARY KEY, pw TEXT");
 
-$pw = hash("sha256", $pw)
+$pw = hash("sha256", $pw);
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM comment WHERE id = ? AND pw = ?;");
 $stmt->bind_param($id, $pw);
