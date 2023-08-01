@@ -18,7 +18,7 @@ $stmt->prepare("SELECT * FROM file_storage WHERE id = ?;");
 $stmt->bind_param("i", $file_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
-if(mysql_num_rows($cursor) >= 1 && file_exists($web_file_dir.'/'.$file_id)) {
+if($cursor->num_rows >= 1 && file_exists($web_file_dir.'/'.$file_id)) {
     $row = $cursor->fetch_assoc();
     header("Content-Type: ".$row["type"]);
     header("Content-Disposition: attachment;filename=".$row["name"]);

@@ -23,7 +23,7 @@ $stmt->prepare("SELECT * FROM user WHERE uid = ?;");
 $stmt->bind_param("s", $id, $pw);
 $stmt->execute();
 $cursor = $stmt->get_result();
-if(mysql_num_rows($cursor) >= 1) {
+if($cursor->num_rows >= 1) {
     $stmt->close();
     $mysqli->close();
     http_response_code(400);

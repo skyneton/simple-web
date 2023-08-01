@@ -14,7 +14,7 @@ $stmt->execute();
 $cursor = $stmt->get_result();
 $title = "";
 $body = "";
-if(mysql_num_rows($cursor) >= 1) {
+if($cursor->num_rows >= 1) {
     $row = $cursor->fetch_assoc();
     if($row["writter"] === $_SESSION["uid"]) {
         $title = $row["title"];

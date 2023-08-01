@@ -23,7 +23,7 @@ if(strlen($board_id) > 0) {
     $stmt->bind_param("i", $board_id);
     $stmt->execute();
     $cursor = $stmt->get_result();
-    if(mysql_num_rows($cursor) >= 1) {
+    if($cursor->num_rows >= 1) {
         $row = $cursor->fetch_assoc();
         if($row["writter"] === $_SESSION["uid"]) {
             $stmt->close();

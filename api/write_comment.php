@@ -18,7 +18,7 @@ $stmt->prepare("SELECT * FROM board WHERE id = ?;");
 $stmt->bind_param($board_id);
 $stmt->execute();
 $board_cursor = $stmt->get_result();
-if(mysql_num_rows($board_cursor) >= 1) {
+if($board_cursor->num_rows >= 1) {
     $stmt->close();
     $stmt = $mysqli->stmt_init();
     $stmt->prepare("INSERT INTO comment(bid, writter, content) VALUES(?, ?, ?);");

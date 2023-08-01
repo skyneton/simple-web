@@ -19,7 +19,7 @@ $stmt->prepare("SELECT * FROM board WHERE id = ?;");
 $stmt->bind_param("i", $board_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
-if(mysql_num_rows($cursor) < 1) {
+if($cursor->num_rows < 1) {
     $mysqli->close();
     echo "존재하지 않거나 삭제된 게시물입니다.";
     die;
