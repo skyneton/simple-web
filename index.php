@@ -2,7 +2,7 @@
 require_once("db.php");
 
 $mysqli = db_connect();
-create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTOINCREMENT, writter TEXT, title TEXT, body TEXT");
+create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");
 
 if(isset($_GET['query'])) {
     $stmt = $mysqli->stmt_init();
