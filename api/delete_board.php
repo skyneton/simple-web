@@ -33,6 +33,7 @@ if($cursor->num_rows >= 1) {
             unlink($web_file_dir.'/'.$file["id"]);
         }
         $mysqli->query("DELETE FROM file_storage WHERE bid = $board_id;");
+        $mysqli->query("DELETE FROM board WHERE id = $board_id;");
         $mysqli->close();
         die;
     }
