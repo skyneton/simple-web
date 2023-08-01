@@ -61,6 +61,9 @@ $row = $cursor->fetch_assoc();
                 <button onclick="commentEdit(this)">수정</button>
                 <button onclick="commentDelete(<?=$comment['id']?>)" style="display: block">삭제</button>
             <?php }?>
+            <span><?=$comment["id"]?></span>
+            <textarea class="comment-list-input" readonly disabled><?=$comment["content"]?></textarea>
+            <button onclick="commentEditFinish(this, @comment.Cid)" class="comment-edit-btn" style="display: none">수정</button>
         </div>
     <?php }?>
 </div>
