@@ -5,6 +5,7 @@ session_start();
 
 $comment_id = trim_or_empty($_GET['id']);
 if(strlen($comment_id) <= 0) {
+    echo "A";
     http_response_code(400);
     die;
 }
@@ -20,24 +21,31 @@ $stmt->execute();
 $cursor = $stmt->get_result();
 if($cursor->num_rows >= 1) {
     $row = $cursor->fetch_assoc();
-    if($row["writter"] != $_SESSION["uid"]) {
+    if($row["writter"] !== $_SESSION["uid"]) {
         $board_cursor = $stmt->query("SELECT * FROM board WHERE id = ".$row["bid"]);
         if($board_cursor->num_rows >= 1) {
             $board = $board_cursor->fetch_assoc();
             if($_SESSION["uid"] !== $board["writter"]) {
+                echo "B".$_SESSION["uid"]."&".$board["writter"];
+                $stmt->close();
                 $mysqli->close();
                 http_response_code(400);
                 die;
             }
         }else {
+            $stmt->close();
             $mysqli->close();
             http_response_code(400);
+            echo "C";
             die;
         }
     }
+    echo "D";
     $mysqli->query("DELETE FROM comment WHERE id = $comment_id;");
+    $stmt->close();
     $mysqli->close();
     die;
 }
 $mysqli->close();
 http_response_code(400);
+echo "E";
