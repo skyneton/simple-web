@@ -1,6 +1,5 @@
 <?php
 if(isset($_SESSION["uid"])) {
-    echo "ASDFSDFSDF";
     http_response_code(400);
     die;
 }
@@ -16,11 +15,11 @@ if(strlen($id) <= 0 || strlen($pw) <= 0) {
 }
 
 $mysqli = db_connect();
-create_table($mysqli, "board", "id TEXT PRIMARY KEY, pw TEXT");
+create_table($mysqli, "user", "id TEXT PRIMARY KEY, pw TEXT");
 
 $pw = hash("sha256", $pw);
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM comment WHERE id = ? AND pw = ?;");
+$stmt->prepare("SELECT * FROM user WHERE id = ? AND pw = ?;");
 $stmt->bind_param($id, $pw);
 $stmt->execute();
 $cursor = $stmt->get_result();
@@ -34,5 +33,4 @@ if(mysql_num_rows($cursor) >= 1) {
 
 $stmt->close();
 $mysqli->close();
-echo "JKKKKK";
 http_response_code(400);

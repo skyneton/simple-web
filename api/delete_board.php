@@ -6,8 +6,8 @@ $web_file_dir = "/web_files";
 
 $board_id = trim_or_empty($_GET['id']);
 if(strlen($board_id) <= 0) {
-    $this->response->statusCode(400);
-    return $this->response;
+    http_response_code(400);
+    die;
 }
 
 $mysqli = db_connect();
@@ -37,5 +37,4 @@ if(mysql_num_rows($cursor) >= 1) {
     }
 }
 $mysqli->close();
-$this->response->statusCode(400);
-return $this->response
+http_response_code(400);

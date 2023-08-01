@@ -5,8 +5,8 @@ require_once("../utils.php");
 $comment_id = trim_or_empty($_GET['id']);
 $content = trim_or_empty($_POST["content"]);
 if(strlen($comment_id) <= 0 || strlen($content) <= 0) {
-    $this->response->statusCode(400);
-    return $this->response
+    http_response_code(400);
+    die;
 }
 
 $mysqli = db_connect();
@@ -31,5 +31,4 @@ if(mysql_num_rows($cursor) >= 1) {
 }
 $stmt->close();
 $mysqli->close();
-$this->response->statusCode(400);
-return $this->response;
+http_response_code(400);

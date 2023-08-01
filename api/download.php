@@ -4,8 +4,8 @@ require_once("../utils.php");
 
 $file_id = trim_or_empty($_GET["id"]);
 if(strlen($file_id) <= 0) {
-    $this->response->statusCode(400);
-    return $this->response
+    http_response_code(400);
+    die;
 }
 
 $web_file_dir = "/web_files";

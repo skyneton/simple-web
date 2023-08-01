@@ -5,8 +5,8 @@ $board_id = trim_or_empty($_GET['id']);
 $title = trim_or_empty($_POST['title']);
 $body = $_POST['body'];
 if(strlen($title) <= 0 || !isset($body) || !isset($_SESSION["uid"])) {
-    $this->response->statusCode(400);
-    return $this->response;
+    http_response_code(400);
+    die;
 }
 
 require_once("../db.php");
@@ -34,14 +34,14 @@ if(strlen($board_id) > 0) {
         }else {
             $stmt->close();
             $mysqli->close();
-            $this->response->statusCode(400);
-            return $this->response;
+            http_response_code(400);
+            die;
         }
     }else {
         $stmt->close();
         $mysqli->close();
-        $this->response->statusCode(400);
-        return $this->response;
+        http_response_code(400);
+        die;
     }
 }else {
     $board_id = get_auto_number("page", "board") + 1;

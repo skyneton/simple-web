@@ -5,8 +5,8 @@ require_once("../utils.php");
 $board_id = trim_or_empty($_GET['id']);
 $content = trim_or_empty($_POST["content"]);
 if(strlen($board_id) <= 0 || strlen($content) <= 0 || !isset($_SESSION["uid"])) {
-    $this->response->statusCode(400);
-    return $this->response
+    http_response_code(400);
+    die;
 }
 
 $mysqli = db_connect();
@@ -30,5 +30,4 @@ if(mysql_num_rows($board_cursor) >= 1) {
 
 $stmt->close();
 $mysqli->close();
-$this->response->statusCode(400);
-return $this->response
+http_response_code(400);

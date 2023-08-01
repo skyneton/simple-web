@@ -9,33 +9,32 @@ require_once("../utils.php");
 $id = trim_or_empty($_POST["id"])
 $pw = trim_or_empty($_POST["pw"])
 if(strlen($id) <= 0 || strlen($pw) <= 0) {
-    $this->response->statusCode(400);
-    return $this->response
+    http_response_code(400);
+    die;
 }
 
 $mysqli = db_connect();
-create_table($mysqli, "board", "id TEXT PRIMARY KEY, pw TEXT");
+create_table($mysqli, "user", "id TEXT PRIMARY KEY, pw TEXT");
 
 $pw = hash("sha256", $pw)
 
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM comment WHERE id = ?;");
+$stmt->prepare("SELECT * FROM user WHERE id = ?;");
 $stmt->bind_param($id, $pw);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if(mysql_num_rows($cursor) >= 1) {
     $stmt->close();
     $mysqli->close();
-    $this->response->statusCode(400);
-    return $this->response;
+    http_response_code(400);
+    die;
 }
 $stmt->close();
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("INSERT INTO board VALUES(?, ?);");
+$stmt->prepare("INSERT INTO user VALUES(?, ?);");
 $stmt->bind_param($id, $pw);
 $stmt->execute();
 
 $stmt->close();
 $mysqli->close();
-$this->response->statusCode(400);
-return $this->response;
+http_response_code(400);

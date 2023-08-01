@@ -4,8 +4,8 @@ require_once("../utils.php");
 
 $comment_id = trim_or_empty($_GET['id']);
 if(strlen($comment_id) <= 0) {
-    $this->response->statusCode(400);
-    return $this->response
+    http_response_code(400);
+    die;
 }
 
 $mysqli = db_connect();
@@ -25,13 +25,13 @@ if(mysql_num_rows($cursor) >= 1) {
             $board = $board_cursor->fetch_assoc();
             if($_SESSION["uid"] !== $board["writter"]) {
                 $mysqli->close();
-                $this->response->statusCode(400);
-                return $this->response
+                http_response_code(400);
+                die;
             }
         }else {
             $mysqli->close();
-            $this->response->statusCode(400);
-            return $this->response
+            http_response_code(400);
+            die;
         }
     }
     $mysqli->query("DELETE FROM comment WHERE id = $comment_id;");
@@ -39,5 +39,4 @@ if(mysql_num_rows($cursor) >= 1) {
     die
 }
 $mysqli->close();
-$this->response->statusCode(400);
-return $this->response
+http_response_code(400);
