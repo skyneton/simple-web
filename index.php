@@ -12,6 +12,7 @@ if(isset($_GET['query'])) {
     $cursor = $stmt->get_result();
 }else {
     $cursor = $mysqli->query("SELECT id, title FROM board ORDER BY id DESC");
+    echo gettype($cursor);
 }
 ?>
 <ul>
