@@ -36,7 +36,7 @@ if($cursor->num_rows >= 1) {
         }
     }
     $mysqli->query("DELETE FROM comment WHERE id = $comment_id;");
-    $mysqli->close()
+    $mysqli->close();
     die;
 }
 $mysqli->close();
