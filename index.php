@@ -36,6 +36,8 @@ if(isset($_GET['query'])) {
         <td>TITLE</td>
     </tr>
     <?php 
+    echo $cursor;
+    echo isset($cursor);
     echo $cursor->fetch_assoc();
     echo trim(NULL);
     while($row = $cursor->fetch_assoc()) {
