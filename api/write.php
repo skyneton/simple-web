@@ -45,7 +45,7 @@ if(strlen($board_id) > 0) {
         die;
     }
 }else {
-    $board_id = get_auto_number("page", "board") + 1;
+    $board_id = get_auto_number($mysqli, "page", "board") + 1;
     $stmt = $mysqli->stmt_init();
     $stmt->prepare("INSERT INTO board(writter, title, body) VALUES(?, ?, ?);");
     $stmt->bind_param("sss", $_SESSION["uid"], $title, $body);
@@ -54,7 +54,7 @@ if(strlen($board_id) > 0) {
 
 try {
     $mysqli->autocommit(false);
-    $file_id = get_auto_number("page", "file_storage") + 1;
+    $file_id = get_auto_number($mysqli, "page", "file_storage") + 1;
     $size = count($_FILES["files"]["name"]);
     for($i = 0; $i < $size; $i++) {
         $stmt = $mysqli->prepare("INSERT INTO file_storage(bid, type, name) VALUES(?, ?, ?);");
