@@ -27,7 +27,7 @@ $stmt->execute();
 $cursor = $stmt->get_result();
 if($cursor->num_rows >= 1) {
     $row = $cursor->fetch_assoc();
-    $_SESSION["uid"] = $row["id"];
+    $_SESSION["uid"] = $row["uid"];
     $stmt->close();
     $mysqli->close();
     exit;
