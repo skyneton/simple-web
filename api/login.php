@@ -1,5 +1,6 @@
 <?php
 if(isset($_SESSION["uid"])) {
+    echo "ASDFSDFSDF";
     http_response_code(400);
     die;
 }
@@ -10,6 +11,7 @@ $id = trim($_POST["id"])
 $pw = trim($_POST["pw"])
 if(strlen($id) <= 0 || strlen($pw) <= 0) {
     http_response_code(400);
+    echo "TTTT";
     exit;
 }
 
@@ -32,4 +34,5 @@ if(mysql_num_rows($cursor) >= 1) {
 
 $stmt->close();
 $mysqli->close();
+echo "JKKKKK";
 http_response_code(400);
