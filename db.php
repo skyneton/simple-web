@@ -1,5 +1,5 @@
 <?php
-function db_connect($db_host = "localhost", $db_id = "id", $db_pw = "pw", $db_name = "page") {
+function db_connect($db_host = "localhost", $db_id = "web", $db_pw = "mysql_web_password", $db_name = "page") {
     return new mysqli($db_host, $db_id, $db_pw, $db_name);
 }
 
