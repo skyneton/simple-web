@@ -67,7 +67,7 @@ try {
     }
     for($i = 0; $i < $size; $i++) {
         move_uploaded_file($_FILES["files"]["tmp_name"][$i], $web_file_dir.'/'.$file_id);
-        $file_id++
+        $file_id++;
     }
 }catch(Exception $e) {
     $mysqli->rollback();
