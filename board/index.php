@@ -93,11 +93,10 @@ $row = $cursor->fetch_assoc();
             alert("내용을 입력하세요.");
             return;
         }
+        const data = new FormData();
+        data.append("content", comment);
         const res = await fetch(`/api/edit_comment.php?id=${cid}`, {
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                content: comment,
-            }),
+            body: data,
             method: "POST"
         });
         if (!res.ok) {
@@ -113,12 +112,10 @@ $row = $cursor->fetch_assoc();
             alert("내용을 입력하세요.");
             return;
         }
+        const data = new FormData();
+        data.append("content", comment);
         const res = await fetch("/api/write_comment.php?id=<?=$board_id?>", {
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                bid: @id,
-                content: comment,
-            }),
+            body: data,
             method: "POST"
         });
         if (!res.ok) {

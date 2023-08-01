@@ -17,12 +17,11 @@ if(isset($_SESSION["uid"])) {
             alert("값을 정확히 입력해주세요.");
             return;
         }
+        const data = new FormData();
+        data.append("id", id);
+        data.append("pw", pw);
         const res = await fetch("/api/login.php", {
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                id,
-                pw
-            }),
+            body: data,
             method: "POST"
         });
         if (!res.ok) {
