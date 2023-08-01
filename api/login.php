@@ -13,8 +13,8 @@ require_once("../utils.php");
 //     http_response_code(400);
 //     exit;
 // }
-$id = "test"
-$pw = "test"
+$id = "test";
+$pw = "test";
 
 $mysqli = db_connect();
 create_table($mysqli, "user", "id INTEGER AUTO_INCREMENT PRIMARY KEY, uid TEXT, pw TEXT");
