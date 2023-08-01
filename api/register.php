@@ -20,7 +20,7 @@ $pw = hash("sha256", $pw);
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM user WHERE uid = ?;");
-$stmt->bind_param("s", $id, $pw);
+$stmt->bind_param("s", $id);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if($cursor->num_rows >= 1) {
