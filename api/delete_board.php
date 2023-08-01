@@ -1,5 +1,5 @@
 <?php
-require_once("/db.php");
+require_once("../db.php");
 
 $web_file_dir = "/web_files";
 

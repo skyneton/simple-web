@@ -7,7 +7,7 @@ if(strlen($title) <= 0 || !isset($body) || !isset($_SESSION["uid"])) {
     return $this->response;
 }
 
-require_once("/db.php");
+require_once("../db.php");
 
 $web_file_dir = "/web_files";
 

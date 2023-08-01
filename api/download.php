@@ -1,5 +1,5 @@
 <?php
-require_once("/db.php");
+require_once("../db.php");
 
 $file_id = trim($_GET["id"]);
 if(strlen($file_id) <= 0) {

@@ -3,7 +3,7 @@ if(isset($_SESSION["uid"])) {
     die;
 }
 
-require_once("/db.php");
+require_once("../db.php");
 
 $id = trim($_POST["id"])
 $pw = trim($_POST["pw"])

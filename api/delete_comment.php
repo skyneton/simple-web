@@ -1,5 +1,5 @@
 <?php
-require_once("/db.php");
+require_once("../db.php");
 
 $comment_id = trim($_GET['id']);
 if(strlen($comment_id) <= 0) {

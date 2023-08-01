@@ -1,5 +1,5 @@
 <?php
-require_once("/db.php");
+require_once("../db.php");
 
 $comment_id = trim($_GET['id']);
 $content = trim($_POST["content"]);
