@@ -26,4 +26,5 @@ if($cursor->num_rows >= 1 && file_exists($web_file_dir.'/'.$file_id)) {
     readfile($web_file_dir.'/'.$file_id);
 }
 
-$mysqli->close()
+$stmt->close();
+$mysqli->close();
