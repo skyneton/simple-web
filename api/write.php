@@ -12,7 +12,7 @@ if(strlen($title) <= 0 || !isset($body) || !isset($_SESSION["uid"])) {
 }
 
 
-$web_file_dir = "/web_files";
+$web_file_dir = "../../web_files";
 
 $mysqli = db_connect();
 create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");

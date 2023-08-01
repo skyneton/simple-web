@@ -3,7 +3,7 @@ require_once("../db.php");
 require_once("../utils.php");
 session_start();
 
-$web_file_dir = "/web_files";
+$web_file_dir = "../../web_files";
 
 $board_id = trim_or_empty($_GET['id']);
 if(strlen($board_id) <= 0) {

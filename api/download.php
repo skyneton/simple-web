@@ -8,7 +8,7 @@ if(strlen($file_id) <= 0) {
     die;
 }
 
-$web_file_dir = "/web_files";
+$web_file_dir = "../../web_files";
 
 $mysqli = db_connect();
 create_table($mysqli, "file_storage", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INTEGER, type TEXT, name TEXT");
