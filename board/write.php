@@ -3,7 +3,9 @@ require_once("../db.php");
 require_once("../utils.php");
 session_start();
 
-$board_id = trim_or_empty($_GET['id']);
+$board_id = "";
+if(isset($_GET['id']))
+    $board_id = trim_or_empty($_GET['id']);
 
 $mysqli = db_connect();
 create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");
