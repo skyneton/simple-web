@@ -27,7 +27,7 @@ if($cursor->num_rows >= 1) {
 $mysqli->close();
 ?>
 
-<input type="text" class="input-title" placeholder="TITLE" value=<?= '"'.str_replace($title, '"', '\\"').'"' ?> />
+<input type="text" class="input-title" placeholder="TITLE" value="<?=$title ?>" />
 <hr />
 <div class="body" contenteditable="true" style="min-height: 200px; border: 1px solid black;">
     <?=$body?>
