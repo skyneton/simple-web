@@ -8,10 +8,10 @@ function create_table($mysqli, $table, $params) {
 }
 
 function get_auto_number($mysqli, $db_name, $table) {
-    $cursor = $mysqli->query("SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME = '$table';");
+    $cursor = $mysqli->query("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME = '$table';");
     if($cursor->num_rows >= 1) {
         $row = $cursor->fetch_assoc();
-        $num = $row["auto_increment"];
+        $num = $row["AUTO_INCREMENT"];
         if(!isset($num)) $num = 0;
         return $num;
     }
