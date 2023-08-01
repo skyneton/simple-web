@@ -1,7 +1,8 @@
 <?php
 require_once("../db.php");
+require_once("../utils.php");
 
-$board_id = trim($_GET['id']);
+$board_id = trim_or_empty($_GET['id']);
 
 $mysqli = db_connect();
 create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");

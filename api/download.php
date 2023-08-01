@@ -1,7 +1,8 @@
 <?php
 require_once("../db.php");
+require_once("../utils.php");
 
-$file_id = trim($_GET["id"]);
+$file_id = trim_or_empty($_GET["id"]);
 if(strlen($file_id) <= 0) {
     $this->response->statusCode(400);
     return $this->response

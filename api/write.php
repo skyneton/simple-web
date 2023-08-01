@@ -1,6 +1,8 @@
 <?php
-$board_id = trim($_GET['id']);
-$title = trim($_POST['title']);
+require_once("../utils.php");
+
+$board_id = trim_or_empty($_GET['id']);
+$title = trim_or_empty($_POST['title']);
 $body = $_POST['body'];
 if(strlen($title) <= 0 || !isset($body) || !isset($_SESSION["uid"])) {
     $this->response->statusCode(400);

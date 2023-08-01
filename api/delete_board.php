@@ -1,9 +1,10 @@
 <?php
 require_once("../db.php");
+require_once("../utils.php");
 
 $web_file_dir = "/web_files";
 
-$board_id = trim($_GET['id']);
+$board_id = trim_or_empty($_GET['id']);
 if(strlen($board_id) <= 0) {
     $this->response->statusCode(400);
     return $this->response;

@@ -1,8 +1,9 @@
 <?php
 require_once("../db.php");
+require_once("../utils.php");
 
-$comment_id = trim($_GET['id']);
-$content = trim($_POST["content"]);
+$comment_id = trim_or_empty($_GET['id']);
+$content = trim_or_empty($_POST["content"]);
 if(strlen($comment_id) <= 0 || strlen($content) <= 0) {
     $this->response->statusCode(400);
     return $this->response

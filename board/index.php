@@ -7,6 +7,7 @@ if(!isset($board_id)) {
 }
 
 require_once("../db.php");
+require_once("../utils.php");
 
 $mysqli = db_connect();
 create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");
