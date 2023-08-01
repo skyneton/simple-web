@@ -34,7 +34,10 @@ if(isset($_GET['query'])) {
         <td>ID</td>
         <td>TITLE</td>
     </tr>
-    <? while($row = ($cursor->fetch_assoc())) { ?>
+    <?
+    while($row = mysql_fetch_assoc($cursor)) {
+        echo $row["id"];
+        ?>
         <?= $cursor?>
         <?= $row?>
         <tr>
