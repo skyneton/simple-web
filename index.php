@@ -23,7 +23,7 @@ if(isset($_GET['query'])) {
     <?}?>
 </ul>
 <div>
-    <? echo $_GET['query']; ?>
+    <?php echo $_GET['query']; ?>
     <input type="search" class="search-query" value="<?= str_replace(trim($_GET['query']), "\"", "\\\"") ?>" placeholder="검색"/>
     <button class="search-query-btn">검색</button>
 </div>
@@ -35,8 +35,7 @@ if(isset($_GET['query'])) {
         <td>ID</td>
         <td>TITLE</td>
     </tr>
-    <?
-    while($row = mysql_fetch_assoc($cursor)) {
+    <?php while($row = mysql_fetch_assoc($cursor)) {
         echo $row["id"];
         ?>
         <?= $cursor?>
@@ -49,9 +48,9 @@ if(isset($_GET['query'])) {
                 </a>
             </td>
         </tr>
-    <?}?>
+    <?php }?>
 </table>
-<?
+<?php
 $stmt->close();
 $mysqli->close();
 ?>
