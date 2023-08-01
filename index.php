@@ -12,7 +12,6 @@ if(isset($_GET['query'])) {
     $cursor = $stmt->get_result();
 }else {
     $cursor = $mysqli->query("SELECT id, title FROM board ORDER BY id DESC", MYSQLI_USE_RESULT);
-    echo gettype($cursor);
 }
 ?>
 <ul>
@@ -24,8 +23,7 @@ if(isset($_GET['query'])) {
     <?php }?>
 </ul>
 <div>
-    <?php echo isset($_GET['query']); ?>
-    <input type="search" class="search-query" value="<?= str_replace(trim($_GET['query']), "\"", "\\\"") ?>" placeholder="검색"/>
+    <input type="search" class="search-query" value="<?php if(isset($_GET['query'])) echo str_replace(trim($_GET['query']), "\"", "\\\"") ?>" placeholder="검색"/>
     <button class="search-query-btn">검색</button>
 </div>
 <a href="/board/write.php">
@@ -36,15 +34,7 @@ if(isset($_GET['query'])) {
         <td>ID</td>
         <td>TITLE</td>
     </tr>
-    <?php 
-    echo "CURSOR".gettype($cursor);
-    echo "ISSET".isset($cursor);
-    echo trim(NULL);
-    while($row = $cursor->fetch_assoc()) {
-        echo $row["id"];
-        ?>
-        <?= $cursor?>
-        <?= $row?>
+    <?php while($row = $cursor->fetch_assoc()) { ?>
         <tr>
             <td><?=$row["id"]?></td>
             <td>
@@ -56,6 +46,6 @@ if(isset($_GET['query'])) {
     <?php }?>
 </table>
 <?php
-$stmt->close();
+if(isset($stmt)) $stmt->close();
 $mysqli->close();
 ?>
