@@ -63,7 +63,7 @@ $mysqli->close();
             const file = fileList[i];
             data.append(`files[]`, file, file.name);
         }
-        const res = await fetch("/api/write.php", {
+        const res = await fetch(<?php if(isset($board_id)) echo "/api/write.php?id=$board_id"; else echo "/api/write.php"; ?>, {
             body: data,
             method: "POST"
         });

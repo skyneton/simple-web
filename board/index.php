@@ -129,7 +129,7 @@ $row = $cursor->fetch_assoc();
         location.reload();
     };
     document.getElementsByClassName("edit-req")[0].onclick = e => {
-        location.href = "/write.php?id=<?=$board_id?>"
+        location.href = "/board/write.php?id=<?=$board_id?>"
     };
     document.getElementsByClassName("delete-req")[0].onclick = async e => {
         const res = await fetch("/api/delete_board.php?id=<?=$board_id?>", {
