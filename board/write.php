@@ -9,7 +9,7 @@ create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter T
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM board WHERE id = ?;");
-$stmt->bind_param($board_id);
+$stmt->bind_param("i", $board_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
 $title = "";

@@ -22,7 +22,7 @@ if(mysql_num_rows($board_cursor) >= 1) {
     $stmt->close();
     $stmt = $mysqli->stmt_init();
     $stmt->prepare("INSERT INTO comment(bid, writter, content) VALUES(?, ?, ?);");
-    $stmt->bind_param($board_id, $_SESSION["uid"], $content);
+    $stmt->bind_param("iss", $board_id, $_SESSION["uid"], $content);
     $stmt->execute();
     $mysqli->close();
     exit;

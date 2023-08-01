@@ -15,7 +15,7 @@ create_table($mysqli, "file_storage", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bi
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM file_storage WHERE id = ?;");
-$stmt->bind_param($file_id);
+$stmt->bind_param("i", $file_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if(mysql_num_rows($cursor) >= 1 && file_exists($web_file_dir.'/'.$file_id)) {

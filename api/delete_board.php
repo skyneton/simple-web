@@ -17,7 +17,7 @@ create_table($mysqli, "file_storage", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bi
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM board WHERE id = ?;");
-$stmt->bind_param($board_id);
+$stmt->bind_param("i", $board_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if(mysql_num_rows($cursor) >= 1) {

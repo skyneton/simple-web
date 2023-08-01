@@ -20,7 +20,7 @@ $pw = hash("sha256", $pw)
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM user WHERE uid = ?;");
-$stmt->bind_param($id, $pw);
+$stmt->bind_param("s", $id, $pw);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if(mysql_num_rows($cursor) >= 1) {
@@ -32,7 +32,7 @@ if(mysql_num_rows($cursor) >= 1) {
 $stmt->close();
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("INSERT INTO user(uid, pw) VALUES(?, ?);");
-$stmt->bind_param($id, $pw);
+$stmt->bind_param("ss", $id, $pw);
 $stmt->execute();
 
 $stmt->close();

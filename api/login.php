@@ -22,7 +22,7 @@ create_table($mysqli, "user", "id INTEGER AUTO_INCREMENT PRIMARY KEY, uid TEXT, 
 $pw = hash("sha256", $pw);
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM user WHERE uid = ? AND pw = ?;");
-$stmt->bind_param($id, $pw);
+$stmt->bind_param("ss", $id, $pw);
 $stmt->execute();
 $cursor = $stmt->get_result();
 echo mysql_num_rows($cursor);
