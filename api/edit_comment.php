@@ -9,7 +9,7 @@ if(strlen($comment_id) <= 0 || strlen($content) <= 0) {
 }
 
 $mysqli = db_connect();
-create_table($mysqli, "comment", "id INTEGER PRIMARY KEY AUTOINCREMENT, bid INTEGER, writter TEXT, content TEXT");
+create_table($mysqli, "comment", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INTEGER, writter TEXT, content TEXT");
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM comment WHERE id = ?;");

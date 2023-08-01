@@ -9,8 +9,8 @@ if(strlen($board_id) <= 0 || strlen($content) <= 0 || !isset($_SESSION["uid"])) 
 }
 
 $mysqli = db_connect();
-create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTOINCREMENT, writter TEXT, title TEXT, body TEXT");
-create_table($mysqli, "comment", "id INTEGER PRIMARY KEY AUTOINCREMENT, bid INTEGER, writter TEXT, content TEXT");
+create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");
+create_table($mysqli, "comment", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INTEGER, writter TEXT, content TEXT");
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM board WHERE id = ?;");

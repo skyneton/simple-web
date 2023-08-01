@@ -1,5 +1,6 @@
 <?php
 if(isset($_SESSION["uid"])) {
+    http_response_code(400);
     die;
 }
 
@@ -8,8 +9,8 @@ require_once("../db.php");
 $id = trim($_POST["id"])
 $pw = trim($_POST["pw"])
 if(strlen($id) <= 0 || strlen($pw) <= 0) {
-    $this->response->statusCode(400);
-    return $this->response
+    http_response_code(400);
+    exit;
 }
 
 $mysqli = db_connect();
@@ -31,5 +32,4 @@ if(mysql_num_rows($cursor) >= 1) {
 
 $stmt->close();
 $mysqli->close();
-$this->response->statusCode(400);
-return $this->response;
+http_response_code(400);

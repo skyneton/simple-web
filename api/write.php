@@ -12,8 +12,8 @@ require_once("../db.php");
 $web_file_dir = "/web_files";
 
 $mysqli = db_connect();
-create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTOINCREMENT, writter TEXT, title TEXT, body TEXT");
-create_table($mysqli, "file_storage", "id INTEGER PRIMARY KEY AUTOINCREMENT, bid INTEGER, type TEXT, name TEXT");
+create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");
+create_table($mysqli, "file_storage", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INTEGER, type TEXT, name TEXT");
 
 if(strlen($board_id) > 0) {
     $stmt = $mysqli->stmt_init();
