@@ -25,7 +25,7 @@ $stmt->prepare("SELECT * FROM user WHERE uid = ? AND pw = ?;");
 $stmt->bind_param("ss", $id, $pw);
 $stmt->execute();
 $cursor = $stmt->get_result();
-echo $cursor->num_rows;
+echo $cursor->num_rows."<br/>$id<br/>$pw";
 if($cursor->num_rows >= 1) {
     $row = $cursor->fetch_assoc();
     $_SESSION["uid"] = $row["id"];
