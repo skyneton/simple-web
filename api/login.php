@@ -15,11 +15,11 @@ if(strlen($id) <= 0 || strlen($pw) <= 0) {
 }
 
 $mysqli = db_connect();
-create_table($mysqli, "user", "id TEXT PRIMARY KEY, pw TEXT");
+create_table($mysqli, "user", "id INTEGER AUTO_INCREMENT PRIMARY KEY, uid TEXT, pw TEXT");
 
 $pw = hash("sha256", $pw);
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM user WHERE id = ? AND pw = ?;");
+$stmt->prepare("SELECT * FROM user WHERE uid = ? AND pw = ?;");
 $stmt->bind_param($id, $pw);
 $stmt->execute();
 $cursor = $stmt->get_result();
