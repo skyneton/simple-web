@@ -63,7 +63,7 @@ try {
     }
     $mysqli->commit();
     if(!file_exists($web_file_dir)) {
-        mkdir($web_file_dir)
+        mkdir($web_file_dir);
     }
     for($i = 0; $i < $size; $i++) {
         move_uploaded_file($_FILES["files"]["tmp_name"][$i], $web_file_dir.'/'.$file_id);
