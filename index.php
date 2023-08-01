@@ -15,15 +15,15 @@ if(isset($_GET['query'])) {
 }
 ?>
 <ul>
-    <?if(isset($_SESSION["uid"])) {?>
+    <?php if(isset($_SESSION["uid"])) {?>
         <li><a href="/user/logout.php">로그아웃</a></li>
-    <?} else {?>
+    <?php } else {?>
         <li><a href="/user/login.php">로그인</a></li>
         <li><a href="/user/register.php">회원가입</a></li>
-    <?}?>
+    <?php }?>
 </ul>
 <div>
-    <?php echo $_GET['query']; ?>
+    <?php echo isset($_GET['query']); ?>
     <input type="search" class="search-query" value="<?= str_replace(trim($_GET['query']), "\"", "\\\"") ?>" placeholder="검색"/>
     <button class="search-query-btn">검색</button>
 </div>
