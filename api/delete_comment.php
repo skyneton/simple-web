@@ -5,7 +5,6 @@ session_start();
 
 $comment_id = trim_or_empty($_GET['id']);
 if(strlen($comment_id) <= 0) {
-    echo "A";
     http_response_code(400);
     die;
 }
@@ -16,7 +15,7 @@ create_table($mysqli, "comment", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INT
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM comment WHERE id = ?;");
-$stmt->bind_param("i", $board_id);
+$stmt->bind_param("i", $comment_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if($cursor->num_rows >= 1) {
@@ -26,7 +25,6 @@ if($cursor->num_rows >= 1) {
         if($board_cursor->num_rows >= 1) {
             $board = $board_cursor->fetch_assoc();
             if($_SESSION["uid"] !== $board["writter"]) {
-                echo "B".$_SESSION["uid"]."&".$board["writter"];
                 $stmt->close();
                 $mysqli->close();
                 http_response_code(400);
@@ -36,11 +34,9 @@ if($cursor->num_rows >= 1) {
             $stmt->close();
             $mysqli->close();
             http_response_code(400);
-            echo "C";
             die;
         }
     }
-    echo "D";
     $mysqli->query("DELETE FROM comment WHERE id = $comment_id;");
     $stmt->close();
     $mysqli->close();
@@ -48,4 +44,3 @@ if($cursor->num_rows >= 1) {
 }
 $mysqli->close();
 http_response_code(400);
-echo "E";
