@@ -24,7 +24,7 @@ if(isset($_GET['query'])) {
     <?php }?>
 </ul>
 <div>
-    <input type="search" class="search-query" value="<?php if(isset($_GET['query'])) echo str_replace(trim($_GET['query']), '"', '\\"'); ?>" placeholder="검색"/>
+    <input type="search" class="search-query" value="<?php if(isset($_GET['query'])) echo trim($_GET['query']); ?>" placeholder="검색"/>
     <button class="search-query-btn">검색</button>
 </div>
 <a href="/board/write.php">
