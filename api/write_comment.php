@@ -16,7 +16,7 @@ create_table($mysqli, "comment", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INT
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM board WHERE id = ?;");
-$stmt->bind_param($board_id);
+$stmt->bind_param("i", $board_id);
 $stmt->execute();
 $board_cursor = $stmt->get_result();
 if($board_cursor->num_rows >= 1) {
