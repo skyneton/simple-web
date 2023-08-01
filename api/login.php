@@ -1,11 +1,13 @@
 <?php
+require_once("../db.php");
+require_once("../utils.php");
+session_start();
+
 if(isset($_SESSION["uid"])) {
     http_response_code(400);
     die;
 }
 
-require_once("../db.php");
-require_once("../utils.php");
 
 $id = trim_or_empty($_POST["id"]);
 $pw = trim_or_empty($_POST["pw"]);

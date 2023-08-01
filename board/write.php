@@ -1,6 +1,7 @@
 <?php
 require_once("../db.php");
 require_once("../utils.php");
+session_start();
 
 $board_id = trim_or_empty($_GET['id']);
 

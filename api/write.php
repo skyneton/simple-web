@@ -1,5 +1,7 @@
 <?php
 require_once("../utils.php");
+require_once("../db.php");
+session_start();
 
 $board_id = trim_or_empty($_GET['id']);
 $title = trim_or_empty($_POST['title']);
@@ -9,7 +11,6 @@ if(strlen($title) <= 0 || !isset($body) || !isset($_SESSION["uid"])) {
     die;
 }
 
-require_once("../db.php");
 
 $web_file_dir = "/web_files";
 

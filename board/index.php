@@ -1,13 +1,13 @@
 <?php
+require_once("../db.php");
+require_once("../utils.php");
+session_start();
 
 $board_id = $_GET['id'];
 if(!isset($board_id)) {
     echo "<script>alert(\"존재하지 않는 게시판입니다.\")</script>";
     die;
 }
-
-require_once("../db.php");
-require_once("../utils.php");
 
 $mysqli = db_connect();
 create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");
@@ -29,23 +29,23 @@ $row = $cursor->fetch_assoc();
 ?>
 
 <h3><?=$row["title"]?></h3>
-<?if($row["writter"] === $_SESSION["uid"]) {?>
+<?php if($row["writter"] === $_SESSION["uid"]) {?>
     <button class="edit-req">수정</button>
     <button class="delete-req">삭제</button>
-<?}?>
+<?php }?>
 <hr/>
 <div>
     <?=$row["body"]?>
 </div>
 <div>
     <ul>
-        <?
+        <?php
         $file_cursor = $mysqli->query("SELECT * FROM file_storage WHERE bid = $board_id;");
         while($file = $file_cursor->fetch_assoc()) {?>
         <a href="/api/download.php?id=<?=$file["id"]?>" target="_blank">
             <li><?=$file["name"]?></li>
         </a>
-        <?}?>
+        <?php }?>
     </ul>
 </div>
 <div>
@@ -53,16 +53,16 @@ $row = $cursor->fetch_assoc();
         <textarea class="comment-write-input" placeholder="comment..."></textarea>
         <button class="comment-write-btn">작성</button>
     </div>
-    <?
+    <?php
     $comment_cursor = $mysqli->query("SELECT * FROM comment WHERE bid = $board_id ORDER BY id DESC;");
     while($comment = $comment_cursor->fetch_assoc()) {?>
         <div>
-            <?if($comment["writter"] === $_SESSION["uid"] || $row["writter"] === $_SESSION["uid"]) {?>
+            <?php if($comment["writter"] === $_SESSION["uid"] || $row["writter"] === $_SESSION["uid"]) {?>
                 <button onclick="commentEdit(this)">수정</button>
                 <button onclick="commentDelete(<?=$comment['id']?>)" style="display: block">삭제</button>
-            <?}?>
+            <?php }?>
         </div>
-    <?}?>
+    <?php }?>
 </div>
 
 <script defer>
@@ -141,4 +141,4 @@ $row = $cursor->fetch_assoc();
     };
 </script>
 
-<?$mysqli->close()?>
+<?php $mysqli->close()?>

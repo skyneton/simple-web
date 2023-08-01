@@ -1,5 +1,6 @@
 <?php
 require_once("db.php");
+session_start();
 
 $mysqli = db_connect();
 create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");

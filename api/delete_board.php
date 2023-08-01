@@ -1,6 +1,7 @@
 <?php
 require_once("../db.php");
 require_once("../utils.php");
+session_start();
 
 $web_file_dir = "/web_files";
 
