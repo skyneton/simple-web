@@ -6,8 +6,8 @@ if(isset($_SESSION["uid"])) {
 require_once("../db.php");
 require_once("../utils.php");
 
-$id = trim_or_empty($_POST["id"])
-$pw = trim_or_empty($_POST["pw"])
+$id = trim_or_empty($_POST["id"]);
+$pw = trim_or_empty($_POST["pw"]);
 if(strlen($id) <= 0 || strlen($pw) <= 0) {
     http_response_code(400);
     die;
@@ -37,4 +37,3 @@ $stmt->execute();
 
 $stmt->close();
 $mysqli->close();
-http_response_code(400);
