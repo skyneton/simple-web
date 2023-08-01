@@ -46,6 +46,13 @@ if(isset($_GET['query'])) {
         </tr>
     <?php }?>
 </table>
+
+<script>
+    document.getElementsByClassName("search-query-btn")[0].onclick = e => {
+        location.href = `?query=${document.getElementsByClassName("search-query")[0].value}`;
+    }
+</script>
+
 <?php
 if(isset($stmt)) $stmt->close();
 $mysqli->close();
