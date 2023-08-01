@@ -7,7 +7,7 @@ create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter T
 
 if(isset($_GET['query'])) {
     $stmt = $mysqli->stmt_init();
-    $stmt->prepare("SELECT id, title FROM board WHERE title LIKE '%?%' OR body LIKE '%?%' ORDER BY id DESC;");
+    $stmt->prepare("SELECT id, title FROM board WHERE title LIKE CONCAT('%', ?, '%') OR body LIKE CONCAT('%', ?, '%') ORDER BY id DESC;");
     $stmt->bind_param("ss", $_GET['query'], $_GET['query']);
     $stmt->execute();
     $cursor = $stmt->get_result();
