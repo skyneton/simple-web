@@ -6,6 +6,7 @@ session_start();
 $comment_id = trim_or_empty($_GET['id']);
 $content = trim_or_empty($_POST["content"]);
 if(strlen($comment_id) <= 0 || strlen($content) <= 0) {
+    echo "A";
     http_response_code(400);
     die;
 }
@@ -19,6 +20,7 @@ $stmt->bind_param("i", $board_id);
 $stmt->execute();
 $cursor = $stmt->get_result();
 if($cursor->num_rows >= 1) {
+    echo "C";
     $row = $cursor->fetch_assoc();
     if($_SESSION["uid"] === $row["writter"]) {
         $stmt->close();
@@ -33,3 +35,4 @@ if($cursor->num_rows >= 1) {
 $stmt->close();
 $mysqli->close();
 http_response_code(400);
+echo "B";
