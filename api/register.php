@@ -16,7 +16,7 @@ if(strlen($id) <= 0 || strlen($pw) <= 0) {
 $mysqli = db_connect();
 create_table($mysqli, "user", "id INTEGER AUTO_INCREMENT PRIMARY KEY, uid TEXT, pw TEXT");
 
-$pw = hash("sha256", $pw)
+$pw = hash("sha256", $pw);
 
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("SELECT * FROM user WHERE uid = ?;");
