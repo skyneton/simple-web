@@ -11,10 +11,11 @@ $mysqli = db_connect();
 create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");
 
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM board WHERE id = ?;");
-$stmt->bind_param("i", $board_id);
-$stmt->execute();
-$cursor = $stmt->get_result();
+// $stmt->prepare("SELECT * FROM board WHERE id = ?;");
+// $stmt->bind_param("i", $board_id);
+// $stmt->execute();
+// $cursor = $stmt->get_result();
+$cursor = $mysqli->query("SELECT * FROM board WHERE id = '".$board_id."';");
 $title = "";
 $body = "";
 if($cursor->num_rows >= 1) {

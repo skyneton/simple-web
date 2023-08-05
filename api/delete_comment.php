@@ -14,14 +14,15 @@ create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter T
 create_table($mysqli, "comment", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INTEGER, writter TEXT, content TEXT");
 
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM comment WHERE id = ?;");
-$stmt->bind_param("i", $comment_id);
-$stmt->execute();
-$cursor = $stmt->get_result();
+// $stmt->prepare("SELECT * FROM comment WHERE id = ?;");
+// $stmt->bind_param("i", $comment_id);
+// $stmt->execute();
+// $cursor = $stmt->get_result();
+$cursor = $mysqli->query("SELECT * FROM comment WHERE id = ".$comment_id.";");
 if($cursor->num_rows >= 1) {
     $row = $cursor->fetch_assoc();
     if($row["writter"] !== $_SESSION["uid"]) {
-        $board_cursor = $stmt->query("SELECT * FROM board WHERE id = ".$row["bid"]);
+        $board_cursor = $mysqli->query("SELECT * FROM board WHERE id = ".$row["bid"]);
         if($board_cursor->num_rows >= 1) {
             $board = $board_cursor->fetch_assoc();
             if($_SESSION["uid"] !== $board["writter"]) {

@@ -14,19 +14,21 @@ $mysqli = db_connect();
 create_table($mysqli, "comment", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INTEGER, writter TEXT, content TEXT");
 
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM comment WHERE id = ?;");
-$stmt->bind_param("i", $comment_id);
-$stmt->execute();
-$cursor = $stmt->get_result();
+// $stmt->prepare("SELECT * FROM comment WHERE id = ?;");
+// $stmt->bind_param("i", $comment_id);
+// $stmt->execute();
+// $cursor = $stmt->get_result();
+$cursor = $mysqli->query("SELECT * FROM comment WHERE id = ".$comment_id.";");
 if($cursor->num_rows >= 1) {
     $row = $cursor->fetch_assoc();
     if($_SESSION["uid"] === $row["writter"]) {
         $stmt->close();
-        $stmt = $mysqli->stmt_init();
-        $stmt->prepare("UPDATE comment SET content = ? WHERE id = $comment_id");
-        $stmt->bind_param("s", $content);
-        $stmt->execute();
-        $stmt->close();
+        // $stmt = $mysqli->stmt_init();
+        // $stmt->prepare("UPDATE comment SET content = ? WHERE id = $comment_id");
+        // $stmt->bind_param("s", $content);
+        // $stmt->execute();
+        // $stmt->close();
+        $mysqli->query("UPDATE comment SET content = ".$comment_id." WHERE id = $comment_id");
         exit;
     }
 }

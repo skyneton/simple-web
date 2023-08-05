@@ -21,10 +21,11 @@ create_table($mysqli, "user", "id INTEGER AUTO_INCREMENT PRIMARY KEY, uid TEXT, 
 
 $pw = hash("sha256", $pw);
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM user WHERE uid = ? AND pw = ?;");
-$stmt->bind_param("ss", $id, $pw);
-$stmt->execute();
-$cursor = $stmt->get_result();
+// $stmt->prepare("SELECT * FROM user WHERE uid = ? AND pw = ?;");
+// $stmt->bind_param("ss", $id, $pw);
+// $stmt->execute();
+// $cursor = $stmt->get_result();
+$cursor = $mysqli->query("SELECT * FROM user WHERE uid = '".$id."' AND pw = '".$pw."';");
 if($cursor->num_rows >= 1) {
     $row = $cursor->fetch_assoc();
     $_SESSION["uid"] = $row["uid"];

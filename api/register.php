@@ -19,11 +19,12 @@ create_table($mysqli, "user", "id INTEGER AUTO_INCREMENT PRIMARY KEY, uid TEXT, 
 
 $pw = hash("sha256", $pw);
 
-$stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM user WHERE uid = ?;");
-$stmt->bind_param("s", $id);
-$stmt->execute();
-$cursor = $stmt->get_result();
+// $stmt = $mysqli->stmt_init();
+// $stmt->prepare("SELECT * FROM user WHERE uid = ?;");
+// $stmt->bind_param("s", $id);
+// $stmt->execute();
+// $cursor = $stmt->get_result();
+$cursor = $mysqli->query("SELECT * FROM user WHERE uid = '".$id."';");
 if($cursor->num_rows >= 1) {
     $stmt->close();
     $mysqli->close();

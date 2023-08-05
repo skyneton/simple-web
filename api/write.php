@@ -20,10 +20,11 @@ create_table($mysqli, "file_storage", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bi
 
 if(strlen($board_id) > 0) {
     $stmt = $mysqli->stmt_init();
-    $stmt->prepare("SELECT * FROM board WHERE id = ?;");
-    $stmt->bind_param("i", $board_id);
-    $stmt->execute();
-    $cursor = $stmt->get_result();
+    // $stmt->prepare("SELECT * FROM board WHERE id = ?;");
+    // $stmt->bind_param("i", $board_id);
+    // $stmt->execute();
+    // $cursor = $stmt->get_result();
+    $cursor = $mysqli->query("SELECT * FROM board WHERE id = ".$board_id.";");
     if($cursor->num_rows >= 1) {
         $row = $cursor->fetch_assoc();
         if($row["writter"] === $_SESSION["uid"]) {

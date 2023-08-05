@@ -14,10 +14,11 @@ $mysqli = db_connect();
 create_table($mysqli, "file_storage", "id INTEGER PRIMARY KEY AUTO_INCREMENT, bid INTEGER, type TEXT, name TEXT");
 
 $stmt = $mysqli->stmt_init();
-$stmt->prepare("SELECT * FROM file_storage WHERE id = ?;");
-$stmt->bind_param("i", $file_id);
-$stmt->execute();
-$cursor = $stmt->get_result();
+// $stmt->prepare("SELECT * FROM file_storage WHERE id = ?;");
+// $stmt->bind_param("i", $file_id);
+// $stmt->execute();
+// $cursor = $stmt->get_result();
+$cursor = $mysqli->query("SELECT * FROM file_storage WHERE id = ".$file_id.";");
 if($cursor->num_rows >= 1 && file_exists($web_file_dir.'/'.$file_id)) {
     $row = $cursor->fetch_assoc();
     header("Content-Type: ".$row["type"]);

@@ -7,12 +7,13 @@ create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter T
 
 if(isset($_GET['query'])) {
     $stmt = $mysqli->stmt_init();
-    $stmt->prepare("SELECT id, title FROM board WHERE title LIKE CONCAT('%', ?, '%') OR body LIKE CONCAT('%', ?, '%') ORDER BY id DESC;");
-    $stmt->bind_param("ss", $_GET['query'], $_GET['query']);
-    $stmt->execute();
-    $cursor = $stmt->get_result();
+    // $stmt->prepare("SELECT id, title FROM board WHERE title LIKE CONCAT('%', ?, '%') OR body LIKE CONCAT('%', ?, '%') ORDER BY id DESC;");
+    // $stmt->bind_param("ss", $_GET['query'], $_GET['query']);
+    // $stmt->execute();
+    // $cursor = $stmt->get_result();
+    $cursor = $mysqli->query("SELECT id, title FROM board WHERE title LIKE '%".$_GET['query']."%' OR body LIKE '%".$_GET['query']."%' ORDER BY id DESC;");
 }else {
-    $cursor = $mysqli->query("SELECT id, title FROM board ORDER BY id DESC", MYSQLI_USE_RESULT);
+    $cursor = $mysqli->query("SELECT id, title FROM board ORDER BY id DESC;");
 }
 ?>
 <ul>
