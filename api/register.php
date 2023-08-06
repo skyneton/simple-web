@@ -31,7 +31,7 @@ if($cursor->num_rows >= 1) {
     http_response_code(400);
     die;
 }
-$stmt->close();
+// $stmt->close();
 $stmt = $mysqli->stmt_init();
 $stmt->prepare("INSERT INTO user(uid, pw) VALUES(?, ?);");
 $stmt->bind_param("ss", $id, $pw);
