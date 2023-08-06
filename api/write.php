@@ -31,8 +31,8 @@ if(strlen($board_id) > 0) {
             $stmt->close();
             $stmt = $mysqli->stmt_init();
             $stmt->prepare("UPDATE board SET title = ?, body = ? WHERE id = $board_id;");
-            $body = str_replace("&lt;", "<", $body);
-            $body = str_replace("&gt;", ">", $body);
+            $body = str_replace("<", "&lt;", $body);
+            $body = str_replace(">", "&gt;", $body);
             $stmt->bind_param("ss", $title, $body);
             $stmt->execute();
         }else {
@@ -51,6 +51,8 @@ if(strlen($board_id) > 0) {
     $board_id = get_auto_number($mysqli, "web", "board") + 1;
     $stmt = $mysqli->stmt_init();
     $stmt->prepare("INSERT INTO board(writter, title, body) VALUES(?, ?, ?);");
+    $body = str_replace("<", "&lt;", $body);
+    $body = str_replace(">", "&gt;", $body);
     $stmt->bind_param("sss", $_SESSION["uid"], $title, $body);
     $stmt->execute();
 }
