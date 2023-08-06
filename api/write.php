@@ -31,8 +31,8 @@ if(strlen($board_id) > 0) {
             $stmt->close();
             $stmt = $mysqli->stmt_init();
             $stmt->prepare("UPDATE board SET title = ?, body = ? WHERE id = $board_id;");
-            $body = str_replace("<", "&lt;", $body);
-            $body = str_replace(">", "&gt;", $body);
+            $body = str_replace("&lt;", "<", $body);
+            $body = str_replace("&gt;", ">", $body);
             $stmt->bind_param("ss", $title, $body);
             $stmt->execute();
         }else {
