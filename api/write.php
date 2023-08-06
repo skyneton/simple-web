@@ -4,6 +4,7 @@ require_once("../db.php");
 session_start();
 
 $board_id = trim_or_empty($_GET['id']);
+$board_id = str_replace("'", "''", $board_id);
 $title = trim_or_empty($_POST['title']);
 $body = $_POST['body'];
 if(strlen($title) <= 0 || !isset($body) || !isset($_SESSION["uid"])) {
@@ -31,8 +32,19 @@ if(strlen($board_id) > 0) {
             $stmt->close();
             $stmt = $mysqli->stmt_init();
             $stmt->prepare("UPDATE board SET title = ?, body = ? WHERE id = $board_id;");
-            $body = str_replace("<", "&lt;", $body);
-            $body = str_replace(">", "&gt;", $body);
+            $body = explode("<", $body);
+            $body_join = "";
+            $is_first = true;
+            foreach($arr as $body) {
+                if(!$is_first) {
+                    if(str_starts_with($arr, "div>"))
+                        $body_join = $body_join."<";
+                    else $body_join = $body_join."&lt;";
+                }
+                $is_first = false;
+                $body_join = $board_join.$arr;
+            }
+            $body = $body_join;
             $title = str_replace("<", "&lt;", $title);
             $title = str_replace(">", "&gt;", $title);
             $stmt->bind_param("ss", $title, $body);
@@ -53,8 +65,19 @@ if(strlen($board_id) > 0) {
     $board_id = get_auto_number($mysqli, "web", "board") + 1;
     $stmt = $mysqli->stmt_init();
     $stmt->prepare("INSERT INTO board(writter, title, body) VALUES(?, ?, ?);");
-    $body = str_replace("<", "&lt;", $body);
-    $body = str_replace(">", "&gt;", $body);
+    $body = explode("<", $body);
+    $body_join = "";
+    $is_first = true;
+    foreach($arr as $body) {
+        if(!$is_first) {
+            if(str_starts_with($arr, "div>"))
+                $body_join = $body_join."<";
+            else $body_join = $body_join."&lt;";
+        }
+        $is_first = false;
+        $body_join = $board_join.$arr;
+    }
+    $body = $body_join;
     $title = str_replace("<", "&lt;", $title);
     $title = str_replace(">", "&gt;", $title);
     $stmt->bind_param("sss", $_SESSION["uid"], $title, $body);

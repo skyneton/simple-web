@@ -3,8 +3,9 @@ require_once("../db.php");
 require_once("../utils.php");
 session_start();
 
-$board_id = $_GET['id'];
-if(!isset($board_id)) {
+$board_id = trim_or_empty($_GET['id']);
+$board_id = str_replace("'", "''", $board_id);
+if(strlen($board_id) <= 0) {
     echo "<script>alert(\"존재하지 않는 게시판입니다.\")</script>";
     die;
 }

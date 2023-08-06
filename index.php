@@ -5,13 +5,16 @@ session_start();
 $mysqli = db_connect();
 create_table($mysqli, "board", "id INTEGER PRIMARY KEY AUTO_INCREMENT, writter TEXT, title TEXT, body TEXT");
 
-if(isset($_GET['query'])) {
+$query = trim_or_empty($_GET['query']);
+
+if(strlen($query) > 0) {
     $stmt = $mysqli->stmt_init();
     // $stmt->prepare("SELECT id, title FROM board WHERE title LIKE CONCAT('%', ?, '%') OR body LIKE CONCAT('%', ?, '%') ORDER BY id DESC;");
     // $stmt->bind_param("ss", $_GET['query'], $_GET['query']);
     // $stmt->execute();
     // $cursor = $stmt->get_result();
-    $cursor = $mysqli->query("SELECT id, title FROM board WHERE title LIKE '%".$_GET['query']."%' OR body LIKE '%".$_GET['query']."%' ORDER BY id DESC;");
+    
+    $cursor = $mysqli->query("SELECT id, title FROM board WHERE title LIKE '%".str_replace("'", "''", $query)."%' OR body LIKE '%".$_GET['query']."%' ORDER BY id DESC;");
 }else {
     $cursor = $mysqli->query("SELECT id, title FROM board ORDER BY id DESC;");
 }
@@ -25,7 +28,7 @@ if(isset($_GET['query'])) {
     <?php }?>
 </ul>
 <div>
-    <input type="search" class="search-query" value="<?php if(isset($_GET['query'])) echo trim($_GET['query']); ?>" placeholder="검색"/>
+    <input type="search" class="search-query" value="<?= $query ?>" placeholder="검색"/>
     <button class="search-query-btn">검색</button>
 </div>
 <a href="/board/write.php">
