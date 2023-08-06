@@ -37,7 +37,7 @@ if(strlen($board_id) > 0) {
             $is_first = true;
             foreach($arr as $body) {
                 if(!$is_first) {
-                    if(str_starts_with($arr, "div>"))
+                    if(str_starts_with($arr, "div>") || str_starts_with($arr, "/div>"))
                         $body_join = $body_join."<";
                     else $body_join = $body_join."&lt;";
                 }
@@ -70,7 +70,7 @@ if(strlen($board_id) > 0) {
     $is_first = true;
     foreach($arr as $body) {
         if(!$is_first) {
-            if(str_starts_with($arr, "div>"))
+            if(str_starts_with($arr, "div>") || str_starts_with($arr, "/div>"))
                 $body_join = $body_join."<";
             else $body_join = $body_join."&lt;";
         }
