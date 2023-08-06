@@ -4,6 +4,13 @@ function trim_or_empty($str) {
     return "";
 }
 
+function starts_with($str, $target) {
+    $b = strlen($str);
+    $a = strlen($target);
+    if($b < $a) return false;
+    return substr($str, 0, $a) == $target;
+}
+
 function div_editable_remove($body) {
     $body_spl = explode('<', $body);
     $body = "";
@@ -11,7 +18,7 @@ function div_editable_remove($body) {
     for($i = 0; $i < $end; $i++) {
         $tmp = $body_spl[$i];
         if($i > 0) {
-            if(str_starts_with($tmp, "div>") || str_starts_with($tmp, "/div>"))
+            if(starts_with($tmp, "div>") || starts_with($tmp, "/div>"))
                 $body = $body."<";
             else {
                 $body = $body."&lt;";
