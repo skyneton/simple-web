@@ -33,6 +33,8 @@ if(strlen($board_id) > 0) {
             $stmt->prepare("UPDATE board SET title = ?, body = ? WHERE id = $board_id;");
             $body = str_replace("<", "&lt;", $body);
             $body = str_replace(">", "&gt;", $body);
+            $title = str_replace("<", "&lt;", $title);
+            $title = str_replace(">", "&gt;", $title);
             $stmt->bind_param("ss", $title, $body);
             $stmt->execute();
         }else {
@@ -53,6 +55,8 @@ if(strlen($board_id) > 0) {
     $stmt->prepare("INSERT INTO board(writter, title, body) VALUES(?, ?, ?);");
     $body = str_replace("<", "&lt;", $body);
     $body = str_replace(">", "&gt;", $body);
+    $title = str_replace("<", "&lt;", $title);
+    $title = str_replace(">", "&gt;", $title);
     $stmt->bind_param("sss", $_SESSION["uid"], $title, $body);
     $stmt->execute();
 }
