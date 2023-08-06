@@ -14,8 +14,8 @@ if(strlen($query) > 0) {
     // $stmt->bind_param("ss", $_GET['query'], $_GET['query']);
     // $stmt->execute();
     // $cursor = $stmt->get_result();
-    
-    $cursor = $mysqli->query("SELECT id, title FROM board WHERE title LIKE '%".str_replace("'", "''", $query)."%' OR body LIKE '%".$_GET['query']."%' ORDER BY id DESC;");
+    $real_q = str_replace("'", "''", $query);
+    $cursor = $mysqli->query("SELECT id, title FROM board WHERE title LIKE '%".$real_q."%' OR body LIKE '%".$real_q."%' ORDER BY id DESC;");
 }else {
     $cursor = $mysqli->query("SELECT id, title FROM board ORDER BY id DESC;");
 }
