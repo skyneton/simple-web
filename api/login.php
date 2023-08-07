@@ -25,7 +25,7 @@ $stmt = $mysqli->stmt_init();
 // $stmt->bind_param("ss", $id, $pw);
 // $stmt->execute();
 // $cursor = $stmt->get_result();
-$cursor = $mysqli->query("SELECT * FROM user WHERE uid = '".$id."' AND pw = '".$pw."';");
+$cursor = $mysqli->query("SELECT * FROM user WHERE uid = '".str_replace("'", "''", $id)."' AND pw = '".$pw."';");
 if($cursor->num_rows >= 1) {
     $row = $cursor->fetch_assoc();
     $_SESSION["uid"] = $row["uid"];

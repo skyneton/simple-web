@@ -24,7 +24,7 @@ $pw = hash("sha256", $pw);
 // $stmt->bind_param("s", $id);
 // $stmt->execute();
 // $cursor = $stmt->get_result();
-$cursor = $mysqli->query("SELECT * FROM user WHERE uid = '".$id."';");
+$cursor = $mysqli->query("SELECT * FROM user WHERE uid = '".str_replace("'", "''", $id)."';");
 if($cursor->num_rows >= 1) {
     $stmt->close();
     $mysqli->close();
